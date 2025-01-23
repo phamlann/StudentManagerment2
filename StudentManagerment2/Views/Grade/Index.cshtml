@@ -1,0 +1,46 @@
+﻿@model IEnumerable<StudentManagerment2.Models.Grade>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Danh sách điểm</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Student.FullName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Subject.SubjectName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Score)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Student.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Subject.SubjectName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Score)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+              
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>
