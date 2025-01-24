@@ -153,6 +153,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AuthorizationAttributeController.cs" />
     <Compile Include="Controllers\ClassController.cs" />
     <Compile Include="Controllers\GradeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -172,6 +173,10 @@
     <Compile Include="Migrations\202501230652257_Code2.cs" />
     <Compile Include="Migrations\202501230652257_Code2.Designer.cs">
       <DependentUpon>202501230652257_Code2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202501240306448_Code3.cs" />
+    <Compile Include="Migrations\202501240306448_Code3.Designer.cs">
+      <DependentUpon>202501240306448_Code3.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Class.cs" />
@@ -239,7 +244,6 @@
     <Content Include="Views\Role\Index.cshtml" />
     <Content Include="Views\Role\Create.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Role\Delete.cshtml" />
     <Content Include="Views\Role\Edit.cshtml" />
     <Content Include="Views\StudentManagerment2\Index.cshtml" />
@@ -267,9 +271,12 @@
     <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\Account\Edit.cshtml" />
     <Content Include="Views\Account\Delete.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Shared\_LayoutLogin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\AuthorizationAttribute\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />
@@ -304,6 +311,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202501230652257_Code2.resx">
       <DependentUpon>202501230652257_Code2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202501240306448_Code3.resx">
+      <DependentUpon>202501240306448_Code3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

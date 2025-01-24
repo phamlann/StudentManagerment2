@@ -4,7 +4,8 @@ using StudentManagerment2.Models;
 
 namespace StudentManagerment2.Controllers
 {
-    [Authorize]
+
+    [Authorize]  
     public class ClassController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

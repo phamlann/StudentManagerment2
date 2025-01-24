@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace StudentManagerment2.Controllers
 {
-    [Authorize]
+    
     public class StudentManagerment2Controller : Controller
     {
                 
@@ -19,5 +19,9 @@ namespace StudentManagerment2.Controllers
 
             return View();
         }
+        //public ActionResult LogOut()
+        //{
+        //    return View();
+        //}
     }
 }

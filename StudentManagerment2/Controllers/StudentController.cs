@@ -7,7 +7,8 @@ using StudentManagerment2.Models;
 
 namespace StudentManagerment2.Controllers
 {
-    [Authorize]
+     
+    
     public class StudentController : Controller
     {
         // GET: Student
@@ -17,6 +18,7 @@ namespace StudentManagerment2.Controllers
             var students = db.Students.Include("Class").ToList();
             return View(students);
         }
+        [AuthorizeByRole("Admin")]//test
         public ActionResult Create()
         {
             ViewBag.ClassId = new SelectList(db.Classes, "Id", "ClassName");

@@ -11,12 +11,9 @@ namespace StudentManagerment2.Controllers
 {
     public class AccountController : Controller
     {
-        // GET: Account
-        //public ActionResult Index()
-        //{
-        //    return View();
-        //}
+        
         private ApplicationDbContext db = new ApplicationDbContext();
+       
         public ActionResult Register()
         {
             return View();
@@ -41,23 +38,30 @@ namespace StudentManagerment2.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(User user)
+        public ActionResult Login(LoginViewModel user)
         {
             if (ModelState.IsValid)
             {
+                // Tìm người dùng theo tên đăng nhập
                 var u = db.Users.FirstOrDefault(a => a.Username.Equals(user.Username));
+
+                // Kiểm tra xem người dùng có tồn tại và mật khẩu có khớp không
                 if (u != null && BCrypt.Net.BCrypt.Verify(user.Password, u.Password))
                 {
+                    // Thiết lập session cho người dùng
+                    Session.Clear();
                     Session["UserID"] = u.Id;
                     Session["Username"] = u.Username.ToString();
+                    Session["Role"] = u.Role.RoleName;
                     return RedirectToAction("Index", "StudentManagerment2");
                 }
                 else
                 {
+                    // Thêm lỗi vào ModelState nếu tên đăng nhập hoặc mật khẩu không đúng
                     ModelState.AddModelError("", "Username or Password is wrong.");
                 }
             }
-            return View(user); 
+            return View(user); // Chuyển về trang login nếu có lỗi
         }
 
 
@@ -89,13 +93,14 @@ namespace StudentManagerment2.Controllers
                 if (db.Users.Any(u => u.Email == user.Email))
                 {
                     ModelState.AddModelError("Email", "Email đã được sử dụng.");
+                    ViewBag.Role = new SelectList(db.Roles.ToList(), "Id", "RoleName");//
                     return View(user);
                 }
                 // Mã hóa mật khẩu
                 user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
                 db.Users.Add(user);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index","Account");
             }
             ViewBag.Role = new SelectList(db.Roles.ToList(), "Id", "RoleName");
             return View(user);
