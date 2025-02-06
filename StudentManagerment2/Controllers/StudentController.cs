@@ -7,7 +7,6 @@ using StudentManagerment2.Models;
 
 namespace StudentManagerment2.Controllers
 {
-     
     
     public class StudentController : Controller
     {
@@ -19,12 +18,14 @@ namespace StudentManagerment2.Controllers
             return View(students);
         }
         [AuthorizeByRole("Admin")]//test
+        
         public ActionResult Create()
         {
             ViewBag.ClassId = new SelectList(db.Classes, "Id", "ClassName");
             return View();
         }
         [HttpPost]
+        [AuthorizeByRole("Admin")]
         [ValidateAntiForgeryToken]
         public ActionResult Create(Student student)
         {
@@ -37,12 +38,14 @@ namespace StudentManagerment2.Controllers
             ViewBag.ClassId = new SelectList(db.Classes, "Id", "ClassName", student.ClassId);
             return View(student);
         }
+        [AuthorizeByRole("Admin")]
         public ActionResult Delete(int id)
         {
             var student = db.Students.Find(id);
             return View(student);
         }
         [HttpPost]
+        [AuthorizeByRole("Admin")]
         public ActionResult Delete(int id, Student student)
         {
             student = db.Students.Find(id);
@@ -50,6 +53,7 @@ namespace StudentManagerment2.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+        [AuthorizeByRole("Admin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -66,6 +70,7 @@ namespace StudentManagerment2.Controllers
         }
 
         [HttpPost]
+        [AuthorizeByRole("Admin")]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Student student)
         {

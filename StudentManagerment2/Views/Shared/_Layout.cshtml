@@ -10,34 +10,57 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 
+    <style>
+        html, body {
+            height: 100%;
+        }
+
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .body-content {
+            flex: 1;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px 0;
+            background-color: #f8f9fa;
+        }
+    </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
-        <div class="container">
-            @Html.ActionLink("Hanoi University Of Industry", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
-                <ul class="navbar-nav flex-grow-1">
-                    <li>@Html.ActionLink("Quản lý", "Index", "StudentManagerment2", new { area = "" }, new { @class = "nav-link" })</li>
-                    @*<li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                <li>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>*@
-                </ul>
-            </div>
-            <div class="row mb-4">
-                <div class="col-md-12 text-right">
-                    <a href="@Url.Action("Logout", "Account")" class="btn btn-danger">Đăng xuất</a>
+    <div class="wrapper">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
+            <div class="container">
+                @Html.ActionLink("Hanoi University Of Industry", "Index", "StudentManagerment2", new { area = "" }, new { @class = "navbar-brand" })
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li>@Html.ActionLink("Quản lý", "Index", "StudentManagerment2", new { area = "" }, new { @class = "nav-link" })</li>
+                    </ul>
+                </div>
+                <div class="row mb-4">
+                    <div class="col-md-12 text-right">
+                        <a href="@Url.Action("Logout", "Account")" class="btn btn-danger">Đăng xuất</a>
+                    </div>
                 </div>
             </div>
+        </nav>
+
+        <div class="container body-content">
+            @RenderBody()
+            <hr />
         </div>
-    </nav>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+
+        <footer class="mt-auto">
+            <p>&copy; @DateTime.Now.Year - Quản Lý Thông Tin HaUI</p>
         </footer>
     </div>
 

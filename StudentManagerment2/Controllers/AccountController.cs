@@ -9,6 +9,7 @@ using StudentManagerment2.Models;
 
 namespace StudentManagerment2.Controllers
 {
+    
     public class AccountController : Controller
     {
         
@@ -93,7 +94,7 @@ namespace StudentManagerment2.Controllers
                 if (db.Users.Any(u => u.Email == user.Email))
                 {
                     ModelState.AddModelError("Email", "Email đã được sử dụng.");
-                    ViewBag.Role = new SelectList(db.Roles.ToList(), "Id", "RoleName");//
+                    ViewBag.Role = new SelectList(db.Roles.ToList(), "Id", "RoleName");
                     return View(user);
                 }
                 // Mã hóa mật khẩu

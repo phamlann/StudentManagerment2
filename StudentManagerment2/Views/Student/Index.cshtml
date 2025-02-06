@@ -7,7 +7,7 @@
 <h2>Thông tin sinh viên</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Thêm mới", "Create")
 </p>
 <table class="table">
     <tr>
@@ -54,9 +54,9 @@
                 @Html.DisplayFor(modelItem => item.Class.Subject)
             </td>*@
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("Sửa", "Edit", new { id = item.Id }) |
             
-            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            @Html.ActionLink("Xoá", "Delete", new { id = item.Id })
         </td>
         </tr>
     }

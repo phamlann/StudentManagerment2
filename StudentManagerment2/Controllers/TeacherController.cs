@@ -4,7 +4,7 @@ using StudentManagerment2.Models;
 
 namespace StudentManagerment2.Controllers
 {
-    [Authorize]
+    
     public class TeacherController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -17,6 +17,7 @@ namespace StudentManagerment2.Controllers
         }
 
         // GET: Teacher/Create
+        [AuthorizeByRole("Admin")]
         public ActionResult Create()
         {
             return View();
@@ -24,6 +25,7 @@ namespace StudentManagerment2.Controllers
 
         // POST: Teacher/Create
         [HttpPost]
+        [AuthorizeByRole("Admin")]
         [ValidateAntiForgeryToken]
         public ActionResult Create(Teacher teacher)
         {
@@ -37,6 +39,7 @@ namespace StudentManagerment2.Controllers
         }
 
         // GET: Teacher/Edit/5
+        [AuthorizeByRole("Admin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -50,9 +53,10 @@ namespace StudentManagerment2.Controllers
             }
             return View(teacher);
         }
-
+        
         // POST: Teacher/Edit/5
         [HttpPost]
+        [AuthorizeByRole("Admin")]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Teacher teacher)
         {
@@ -66,6 +70,7 @@ namespace StudentManagerment2.Controllers
         }
 
         // GET: Teacher/Delete/5
+        [AuthorizeByRole("Admin")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -82,6 +87,7 @@ namespace StudentManagerment2.Controllers
 
         // POST: Teacher/Delete/5
         [HttpPost, ActionName("Delete")]
+        [AuthorizeByRole("Admin")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
