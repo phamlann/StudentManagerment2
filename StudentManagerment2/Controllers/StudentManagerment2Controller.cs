@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace StudentManagerment2.Controllers
 {
-    //[Authorize]
+    
     public class StudentManagerment2Controller : Controller
     {
         public ActionResult Index()

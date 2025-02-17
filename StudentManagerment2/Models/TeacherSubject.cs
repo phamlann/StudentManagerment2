@@ -9,11 +9,11 @@ namespace StudentManagerment2.Models
     {
         [Key]
         public int Id { get; set; }
-        public int TeacherId { get; set; } // Khóa ngoại
+        public int TeacherId { get; set; } 
 
         public Teacher Teacher { get; set; } 
 
-        public int SubjectId { get; set; } // Khóa ngoại
+        public int SubjectId { get; set; } 
 
         public Subject Subject { get; set; } 
     }

@@ -4,49 +4,42 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Xoá sinh viên</h2>
-
-<h3>Bạn có chắc chắn muốn xoá sinh viên này không</h3>
-<div>
-    <h4>Student</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.FullName)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.FullName)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.DateOfBirth)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.DateOfBirth)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Class.ClassName)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Class.ClassName)
-        </dd>
-    </dl>
-
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-danger" /> |
-            @Html.ActionLink("Trở về", "Index")
+<div class="container mt-4">
+    <div class="card shadow-lg">
+        <div class="card-header bg-danger text-white">
+            <h3 class="mb-0"><i class="bi bi-trash"></i> Xoá sinh viên</h3>
         </div>
-    }
+        <div class="card-body">
+            <div class="alert alert-warning">
+                <h5 class="mb-0"><i class="bi bi-exclamation-triangle"></i> Bạn có chắc chắn muốn xoá sinh viên này không?</h5>
+            </div>
+
+            <dl class="row">
+                <dt class="col-sm-3 fw-bold">Họ và tên:</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.FullName)</dd>
+
+                <dt class="col-sm-3 fw-bold">Ngày sinh:</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.DateOfBirth)</dd>
+
+                <dt class="col-sm-3 fw-bold">Email:</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Email)</dd>
+
+                <dt class="col-sm-3 fw-bold">Lớp học:</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Class.ClassName)</dd>
+            </dl>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <div class="d-flex gap-2">
+                    <button type="submit" class="btn btn-danger">
+                        <i class="bi bi-trash"></i> Xoá
+                    </button>
+                    <a href="@Url.Action("Index")" class="btn btn-secondary">
+                        <i class="bi bi-arrow-left"></i> Quay lại
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
 </div>
-
-
-
-

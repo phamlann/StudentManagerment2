@@ -10,7 +10,7 @@ namespace StudentManagerment2.Controllers
 {
     public class RoleController : Controller
     {
-        // GET: Role
+        
         private ApplicationDbContext db = new ApplicationDbContext();
         public ActionResult Index()
         {

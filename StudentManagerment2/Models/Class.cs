@@ -10,11 +10,11 @@ namespace StudentManagerment2.Models
     {
         [Key]
         [Required]
-        public int Id { get; set; } // Khóa chính
+        public int Id { get; set; }
         [Required]
-        public string ClassName { get; set; } = string.Empty; // Tên lớp học
+        public string ClassName { get; set; } = string.Empty; 
         [Required]
-        public string Description { get; set; } // Mô tả lớp học
+        public string Description { get; set; } 
 
         // Liên kết với Subject (1 Class -> 1 Subject)
         public int SubjectId { get; set; }

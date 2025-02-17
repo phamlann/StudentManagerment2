@@ -12,9 +12,9 @@ namespace StudentManagerment2.Controllers
     
     public class AccountController : Controller
     {
-        
+
         private ApplicationDbContext db = new ApplicationDbContext();
-       
+
         public ActionResult Register()
         {
             return View();
@@ -25,7 +25,7 @@ namespace StudentManagerment2.Controllers
         {
             if (ModelState.IsValid)
             {
-                user.Password = Crypto.HashPassword(user.Password);
+                user.Password = Crypto.HashPassword(user.Password);// Mã hóa mật khẩu
                 db.Users.Add(user);
                 db.SaveChanges();
                 return RedirectToAction("Login");
@@ -50,16 +50,17 @@ namespace StudentManagerment2.Controllers
                 if (u != null && BCrypt.Net.BCrypt.Verify(user.Password, u.Password))
                 {
                     // Thiết lập session cho người dùng
-                    Session.Clear();
-                    Session["UserID"] = u.Id;
-                    Session["Username"] = u.Username.ToString();
-                    Session["Role"] = u.Role.RoleName;
+                    Session.Clear();// Xóa hết các session cũ
+                    Session["UserID"] = u.Id;// Lưu Id của người dùng
+                    Session["Username"] = u.Username.ToString();// Lưu tên đăng nhập của người dùng
+                    Session["Role"] = u.Role.RoleName;// Lưu quyền của người dùng
                     return RedirectToAction("Index", "StudentManagerment2");
                 }
                 else
                 {
                     // Thêm lỗi vào ModelState nếu tên đăng nhập hoặc mật khẩu không đúng
                     ModelState.AddModelError("", "Username or Password is wrong.");
+                    //TempData["LoginError"] = "Tên đăng nhập hoặc mật khẩu không đúng.";
                 }
             }
             return View(user); // Chuyển về trang login nếu có lỗi
@@ -74,7 +75,7 @@ namespace StudentManagerment2.Controllers
         }
         public ActionResult Create()
         {
-            ViewBag.Role = new SelectList(db.Roles.ToList(), "Id", "RoleName");
+            ViewBag.Role = new SelectList(db.Roles.ToList(), "Id", "RoleName");// Lấy danh sách quyền
             return View();
         }
 
@@ -93,17 +94,17 @@ namespace StudentManagerment2.Controllers
                 // Kiểm tra Email đã tồn tại chưa
                 if (db.Users.Any(u => u.Email == user.Email))
                 {
-                    ModelState.AddModelError("Email", "Email đã được sử dụng.");
-                    ViewBag.Role = new SelectList(db.Roles.ToList(), "Id", "RoleName");
+                    ModelState.AddModelError("Email", "Email đã được sử dụng.");// Thêm lỗi vào ModelState
+                    ViewBag.Role = new SelectList(db.Roles.ToList(), "Id", "RoleName");// Lấy danh sách quyền
                     return View(user);
                 }
                 // Mã hóa mật khẩu
-                user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
+                user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);// Mã hóa mật khẩu
                 db.Users.Add(user);
                 db.SaveChanges();
-                return RedirectToAction("Index","Account");
+                return RedirectToAction("Index", "Account");
             }
-            ViewBag.Role = new SelectList(db.Roles.ToList(), "Id", "RoleName");
+            ViewBag.Role = new SelectList(db.Roles.ToList(), "Id", "RoleName");// Lấy danh sách quyền
             return View(user);
         }
         public ActionResult Index()
@@ -114,7 +115,7 @@ namespace StudentManagerment2.Controllers
         }
         public ActionResult Edit()
         {
-            
+
             return View();
         }
         [HttpPost]
@@ -129,7 +130,7 @@ namespace StudentManagerment2.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.Role = new SelectList(db.Roles.ToList(), "Id", "RoleName", user.RoleId);
+            ViewBag.Role = new SelectList(db.Roles.ToList(), "Id", "RoleName", user.RoleId);// Lấy danh sách quyền
             return View(user);
         }
         public ActionResult Delete(int id)

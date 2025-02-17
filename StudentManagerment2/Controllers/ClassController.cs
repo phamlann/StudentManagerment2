@@ -5,32 +5,32 @@ using StudentManagerment2.Models;
 namespace StudentManagerment2.Controllers
 {
 
-    
+
     public class ClassController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private readonly ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Class
+
         public ActionResult Index()
         {
-            var classes = db.Classes.Include("Teacher").Include("Subject").ToList();
+            var classes = db.Classes.Include("Teacher").Include("Subject").ToList();//lấy dữ liệu từ bảng Class
             return View(classes);
         }
 
-        // GET: Class/Create
+
         [AuthorizeByRole("Admin")]
         public ActionResult Create()
         {
-            ViewBag.TeacherId = new SelectList(db.Teachers, "Id", "FullName");
-            ViewBag.SubjectId = new SelectList(db.Subjects, "Id", "SubjectName");
+            ViewBag.TeacherId = new SelectList(db.Teachers, "Id", "FullName");//tạo ra danh sách giáo viên
+            ViewBag.SubjectId = new SelectList(db.Subjects, "Id", "SubjectName");//tạo ra danh sách môn học
             return View();
         }
 
-        // POST: Class/Create
+
         [HttpPost]
         [AuthorizeByRole("Admin")]
         [ValidateAntiForgeryToken]
-        
+
         public ActionResult Create(Class @class)
         {
             if (ModelState.IsValid)
@@ -40,12 +40,12 @@ namespace StudentManagerment2.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.TeacherId = new SelectList(db.Teachers, "Id", "FullName", @class.TeacherId);
-            ViewBag.SubjectId = new SelectList(db.Subjects, "Id", "SubjectName", @class.SubjectId);
+            ViewBag.TeacherId = new SelectList(db.Teachers, "Id", "FullName", @class.TeacherId);//tạo ra danh sách giáo viên
+            ViewBag.SubjectId = new SelectList(db.Subjects, "Id", "SubjectName", @class.SubjectId);//tạo ra danh sách môn học
             return View(@class);
         }
 
-        // GET: Class/Edit/5
+
         [AuthorizeByRole("Admin")]
         public ActionResult Edit(int? id)
         {
@@ -53,7 +53,7 @@ namespace StudentManagerment2.Controllers
             {
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
             }
-            Class @class = db.Classes.Find(id);
+            var @class = db.Classes.Find(id);
             if (@class == null)
             {
                 return HttpNotFound();
@@ -63,7 +63,7 @@ namespace StudentManagerment2.Controllers
             return View(@class);
         }
 
-        // POST: Class/Edit/5
+
         [HttpPost]
         [AuthorizeByRole("Admin")]
         [ValidateAntiForgeryToken]
@@ -71,16 +71,16 @@ namespace StudentManagerment2.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(@class).State = System.Data.Entity.EntityState.Modified;
+                db.Entry(@class).State = System.Data.Entity.EntityState.Modified;//cập nhật dữ liệu
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.TeacherId = new SelectList(db.Teachers, "Id", "FullName", @class.TeacherId);
-            ViewBag.SubjectId = new SelectList(db.Subjects, "Id", "SubjectName", @class.SubjectId);
+            ViewBag.TeacherId = new SelectList(db.Teachers, "Id", "FullName", @class.TeacherId);//tạo ra danh sách giáo viên
+            ViewBag.SubjectId = new SelectList(db.Subjects, "Id", "SubjectName", @class.SubjectId);//tạo ra danh sách môn học
             return View(@class);
         }
 
-        // GET: Class/Delete/5
+
         [AuthorizeByRole("Admin")]
         public ActionResult Delete(int? id)
         {
@@ -88,23 +88,26 @@ namespace StudentManagerment2.Controllers
             {
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
             }
-            Class @class = db.Classes.Find(id);
+            var @class = db.Classes.Find(id);
             if (@class == null)
             {
                 return HttpNotFound();
             }
-            return View(@class);
+            return View(@class);//trả về view
         }
 
-        // POST: Class/Delete/5
+
         [HttpPost, ActionName("Delete")]
         [AuthorizeByRole("Admin")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Class @class = db.Classes.Find(id);
-            db.Classes.Remove(@class);
-            db.SaveChanges();
+            var @class = db.Classes.Find(id);
+            if (@class != null)
+            {
+                db.Classes.Remove(@class);
+                db.SaveChanges();
+            }
             return RedirectToAction("Index");
         }
     }

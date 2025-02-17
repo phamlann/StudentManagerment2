@@ -9,11 +9,11 @@ namespace StudentManagerment2.Models
     public class Teacher
     {
         [Key]
-        public int Id { get; set; } // Khóa chính
-        public string FullName { get; set; } = string.Empty; // Họ và tên
-        public string Department { get; set; } = string.Empty; // Khoa giảng dạy
+        public int Id { get; set; } 
+        public string FullName { get; set; } = string.Empty; 
+        public string Department { get; set; } = string.Empty; 
 
-        // Liên kết với Class (1 Teacher -> N Class)
+        // Liên kết với Class (1 Teacher -> nhiều Class)
         public ICollection<Class> Classes { get; set; } = new List<Class>();
 
         // Liên kết với Subject (Nhiều Teacher -> N Subject)

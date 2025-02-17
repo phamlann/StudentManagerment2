@@ -1,46 +1,36 @@
 ﻿@model IEnumerable<StudentManagerment2.Models.Grade>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Danh sách điểm";
 }
 
-<h2>Danh sách điểm</h2>
+<h2 class="text-center text-primary">Danh sách điểm</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Thêm mới", "Create", null, new { @class = "btn btn-primary mb-3" })
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Student.FullName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Subject.SubjectName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Score)
-        </th>
-        <th></th>
-    </tr>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Student.FullName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Subject.SubjectName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Score)
-            </td>
-            <td>
-                @Html.ActionLink("Sửa", "Edit", new { id = item.Id }) |
-              
-                @Html.ActionLink("Xoá", "Delete", new { id = item.Id })
-            </td>
+<table class="table table-striped table-bordered table-hover">
+    <thead class="table-dark">
+        <tr class="text-center">
+            <th>@Html.DisplayNameFor(model => model.Student.FullName)</th>
+            <th>@Html.DisplayNameFor(model => model.Subject.SubjectName)</th>
+            <th>@Html.DisplayNameFor(model => model.Score)</th>
+            <th>Hành động</th>
         </tr>
-    }
-
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Student.FullName)</td>
+                <td>@Html.DisplayFor(modelItem => item.Subject.SubjectName)</td>
+                <td>@Html.DisplayFor(modelItem => item.Score)</td>
+                <td class="text-center">
+                    @Html.ActionLink("Sửa", "Edit", new { id = item.Id }, new { @class = "btn btn-warning btn-sm" })
+                    @Html.ActionLink("Xóa", "Delete", new { id = item.Id }, new { @class = "btn btn-danger btn-sm"})
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>

@@ -4,28 +4,28 @@ using StudentManagerment2.Models;
 
 namespace StudentManagerment2.Controllers
 {
-   
+
     public class GradeController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private readonly ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Grade
+        
         public ActionResult Index()
         {
-            var grades = db.Grades.Include("Student").Include("Subject").ToList();
+            var grades = db.Grades.Include("Student").Include("Subject").ToList();//lấy dữ liệu từ bảng Student và Subject
             return View(grades);
         }
 
-        // GET: Grade/Create
+        
         [AuthorizeByRole("Admin")]
         public ActionResult Create()
         {
-            ViewBag.StudentId = new SelectList(db.Students, "Id", "FullName");
-            ViewBag.SubjectID = new SelectList(db.Subjects, "Id", "SubjectName");
+            ViewBag.StudentId = new SelectList(db.Students, "Id", "FullName");//tạo ra danh sách sinh viên
+            ViewBag.SubjectID = new SelectList(db.Subjects, "Id", "SubjectName");//tạo ra danh sách môn học
             return View();
         }
 
-        // POST: Grade/Create
+        
         [HttpPost]
         [AuthorizeByRole("Admin")]
         [ValidateAntiForgeryToken]
@@ -38,20 +38,20 @@ namespace StudentManagerment2.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.StudentId = new SelectList(db.Students, "Id", "FullName", grade.StudentId);
-            ViewBag.SubjectID = new SelectList(db.Subjects, "Id", "SubjectName", grade.SubjectID);
+            ViewBag.StudentId = new SelectList(db.Students, "Id", "FullName", grade.StudentId);//tạo ra danh sách sinh viên
+            ViewBag.SubjectID = new SelectList(db.Subjects, "Id", "SubjectName", grade.SubjectID);//tạo ra danh sách môn học
             return View(grade);
         }
 
-        // GET: Grade/Edit/5
+        
         [AuthorizeByRole("Admin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);//trả về lỗi 400
             }
-            Grade grade = db.Grades.Find(id);
+            var grade = db.Grades.Find(id);
             if (grade == null)
             {
                 return HttpNotFound();
@@ -61,7 +61,7 @@ namespace StudentManagerment2.Controllers
             return View(grade);
         }
 
-        // POST: Grade/Edit/5
+        
         [HttpPost]
         [AuthorizeByRole("Admin")]
         [ValidateAntiForgeryToken]
@@ -69,7 +69,7 @@ namespace StudentManagerment2.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(grade).State = System.Data.Entity.EntityState.Modified;
+                db.Entry(grade).State = System.Data.Entity.EntityState.Modified;//cập nhật dữ liệu
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -78,7 +78,7 @@ namespace StudentManagerment2.Controllers
             return View(grade);
         }
 
-        // GET: Grade/Delete/5
+        
         [AuthorizeByRole("Admin")]
         public ActionResult Delete(int? id)
         {
@@ -86,7 +86,7 @@ namespace StudentManagerment2.Controllers
             {
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
             }
-            Grade grade = db.Grades.Find(id);
+            var grade = db.Grades.Find(id);
             if (grade == null)
             {
                 return HttpNotFound();
@@ -94,15 +94,18 @@ namespace StudentManagerment2.Controllers
             return View(grade);
         }
 
-        // POST: Grade/Delete/5
+        
         [HttpPost, ActionName("Delete")]
         [AuthorizeByRole("Admin")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Grade grade = db.Grades.Find(id);
-            db.Grades.Remove(grade);
-            db.SaveChanges();
+            var grade = db.Grades.Find(id);
+            if (grade != null)
+            {
+                db.Grades.Remove(grade);
+                db.SaveChanges();
+            }
             return RedirectToAction("Index");
         }
     }

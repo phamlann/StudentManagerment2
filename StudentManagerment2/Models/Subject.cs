@@ -9,9 +9,9 @@ namespace StudentManagerment2.Models
     public class Subject
     {
         [Key]
-        public int Id { get; set; } // Khóa chính
-        public string SubjectName { get; set; } // Tên môn học
-        public string Description { get; set; } // Mô tả môn học
+        public int Id { get; set; } 
+        public string SubjectName { get; set; } 
+        public string Description { get; set; } 
 
         // Liên kết với Class (1 Subject -> N Class)
         public ICollection<Class> Classes { get; set; } = new List<Class>();
