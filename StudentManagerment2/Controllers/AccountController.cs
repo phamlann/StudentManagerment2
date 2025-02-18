@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Validation;
 using System.Linq;
 using System.Web;
@@ -131,13 +132,27 @@ namespace StudentManagerment2.Controllers
 
             return View(users);
         }
-        public ActionResult Edit()
-        {
+        //public ActionResult Edit()
+        //{
 
-            return View();
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        //    return View();
+        //}
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Edit(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+        //    }
+        //    User user = db.Users.Find(id);
+        //    if (user == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    ViewBag.Role = new SelectList(db.Roles.ToList(), "Id", "RoleName", user.RoleId);// Lấy danh sách quyền
+        //    return View(user);
+        //}
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -149,9 +164,24 @@ namespace StudentManagerment2.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.Role = new SelectList(db.Roles.ToList(), "Id", "RoleName", user.RoleId);// Lấy danh sách quyền
+            ViewBag.Role = new SelectList(db.Roles.ToList(), "Id", "RoleName", user.RoleId); // Lấy danh sách quyền
             return View(user);
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(User user)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(user).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            ViewBag.Role = new SelectList(db.Roles.ToList(), "Id", "RoleName", user.RoleId); // Lấy danh sách quyền
+            return View(user);
+        }
+
         public ActionResult Delete(int id)
         {
             User user = db.Users.Find(id);
