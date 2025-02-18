@@ -93,7 +93,7 @@ namespace StudentManagerment2.Controllers
             {
                 return HttpNotFound();
             }
-            return View(@class);//trả về view
+            return View(@class);
         }
 
 

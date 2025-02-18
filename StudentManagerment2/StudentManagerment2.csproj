@@ -178,6 +178,14 @@
     <Compile Include="Migrations\202501240306448_Code3.Designer.cs">
       <DependentUpon>202501240306448_Code3.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202502170959128_code4.cs" />
+    <Compile Include="Migrations\202502170959128_code4.Designer.cs">
+      <DependentUpon>202502170959128_code4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202502171000057_code5.cs" />
+    <Compile Include="Migrations\202502171000057_code5.Designer.cs">
+      <DependentUpon>202502171000057_code5.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Class.cs" />
     <Compile Include="Models\Grade.cs" />
@@ -314,6 +322,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202501240306448_Code3.resx">
       <DependentUpon>202501240306448_Code3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202502170959128_code4.resx">
+      <DependentUpon>202502170959128_code4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202502171000057_code5.resx">
+      <DependentUpon>202502171000057_code5.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

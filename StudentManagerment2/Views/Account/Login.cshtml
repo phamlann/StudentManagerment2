@@ -9,13 +9,78 @@
     body {
         background: url('https://tuyensinh.haui.edu.vn/static/uploads/albumImages/1523862552207.png') no-repeat center center fixed;
         background-size: cover;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .login-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        padding: 0 5%;
+    }
+
+    .login-card {
+        width: 100%;
+        max-width: 400px;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.8);
+        padding: 30px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+        .login-card h2 {
+            color: black;
+            font-weight: bold;
+        }
+
+        .login-card h6 {
+            color: black;
+            margin-bottom: 20px;
+        }
+
+    .alert-danger {
+        margin-bottom: 20px;
+        font-size: 1.1rem;
+    }
+
+    .form-control {
+        border-radius: 5px;
+        padding: 15px;
+        font-size: 1rem;
+        border: 1px solid #ddd;
+        width: 100%; 
+    }
+
+        .form-control:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+
+    .btn-primary {
+        background-color: #007bff;
+        border: none;
+        padding: 15px; 
+        font-size: 1.2rem;
+        width: 100%; 
+        border-radius: 5px;
+        transition: all 0.3s ease;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            box-shadow: 0 2px 5px rgba(0, 123, 255, 0.3);
+        }
+
+    .login-card .form-group {
+        margin-bottom: 20px;
     }
 </style>
 
-<div class="d-flex align-items-center vh-100" style="justify-content: flex-start; padding-left: 5%; ">
-    <div class="card shadow-lg p-4" style="width: 400px; border-radius: 10px; background: rgba(255, 255, 255, 0.8);">
-        <h2 class="text-center mb-4" style="color: black; font-weight: bold;">ĐẠI HỌC CÔNG NGHIỆP HÀ NỘI</h2>
-        <h6 class="text-center mb-4" style="color:black">One Haui</h6>
+<div class="login-container">
+    <div class="login-card">
+        <h2 class="text-center mb-4">ĐẠI HỌC CÔNG NGHIỆP HÀ NỘI</h2>
+        <h6 class="text-center mb-4">One Haui</h6>
 
         @if (TempData["LoginError"] != null)
         {
@@ -28,16 +93,12 @@
         {
             @Html.AntiForgeryToken()
 
-
-
-            <div class="mb-3">
-                @*@Html.LabelFor(m => m.Username, new { @class = "form-label fw-bold" })*@
+            <div class="form-group">
                 @Html.TextBoxFor(m => m.Username, new { @class = "form-control", placeholder = "Nhập tên đăng nhập" })
                 @Html.ValidationMessageFor(m => m.Username, "", new { @class = "text-danger" })
             </div>
 
-            <div class="mb-3">
-                @*@Html.LabelFor(m => m.Password, new { @class = "form-label fw-bold" })*@
+            <div class="form-group">
                 @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Nhập mật khẩu" })
                 @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
             </div>

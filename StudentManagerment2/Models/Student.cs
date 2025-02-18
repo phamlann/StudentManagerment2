@@ -10,15 +10,19 @@ namespace StudentManagerment2.Models
     public class Student
     {
         [Key]
-        public int Id { get; set; } 
-        public string FullName { get; set; } = string.Empty; 
-        public DateTime DateOfBirth { get; set; } 
-        public string Email { get; set; } = string.Empty; 
+        public int Id { get; set; }
+
+
+        public string FullName { get; set; } = string.Empty;
+
+
+        public DateTime DateOfBirth { get; set; }
+        public string Email { get; set; } = string.Empty;
 
         // Liên kết với Class
         public int ClassId { get; set; }
         [ForeignKey("ClassId")]
-        public Class Class { get; set; } 
+        public Class Class { get; set; }
 
         // Liên kết với Grade
         public ICollection<Grade> Grades { get; set; } = new List<Grade>();

@@ -15,9 +15,12 @@ namespace StudentManagerment2.Models
 
         [Required]
         [StringLength(100)]
+       
         public string Email { get; set; }
 
         [StringLength(15)]
+       
+        [Required]
         public string PhoneNumber { get; set; }
 
         [Required]

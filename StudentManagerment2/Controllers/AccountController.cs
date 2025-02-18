@@ -60,7 +60,7 @@ namespace StudentManagerment2.Controllers
                 {
                     // Thêm lỗi vào ModelState nếu tên đăng nhập hoặc mật khẩu không đúng
                     ModelState.AddModelError("", "Username or Password is wrong.");
-                    //TempData["LoginError"] = "Tên đăng nhập hoặc mật khẩu không đúng.";
+                    
                 }
             }
             return View(user); // Chuyển về trang login nếu có lỗi
@@ -119,6 +119,7 @@ namespace StudentManagerment2.Controllers
             return View();
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Edit(int? id)
         {
             if (id == null)

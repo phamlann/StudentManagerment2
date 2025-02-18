@@ -49,7 +49,7 @@ namespace StudentManagerment2.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);//trả về lỗi 400
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
             }
             var grade = db.Grades.Find(id);
             if (grade == null)

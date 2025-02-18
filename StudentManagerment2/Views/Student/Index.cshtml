@@ -29,8 +29,10 @@
                 <td>@Html.DisplayFor(modelItem => item.Email)</td>
                 <td>@Html.DisplayFor(modelItem => item.Class.ClassName)</td>
                 <td class="text-center">
-                    @Html.ActionLink("Sửa", "Edit", new { id = item.Id }, new { @class = "btn btn-warning btn-sm" })
-                    @Html.ActionLink("Xóa", "Delete", new { id = item.Id }, new { @class = "btn btn-danger btn-sm" })
+                    <div class="d-inline">
+                        @Html.ActionLink("Sửa", "Edit", new { id = item.Id }, new { @class = "btn btn-warning btn-sm mr-2" })
+                        @Html.ActionLink("Xóa", "Delete", new { id = item.Id }, new { @class = "btn btn-danger btn-sm" })
+                    </div>
                 </td>
             </tr>
         }

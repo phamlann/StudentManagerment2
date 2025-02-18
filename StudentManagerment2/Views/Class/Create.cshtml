@@ -1,13 +1,13 @@
 ﻿@model StudentManagerment2.Models.Class
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Thêm lớp học mới";
 }
 
 <div class="container mt-4">
     <div class="card shadow-lg">
         <div class="card-header bg-success text-white">
-            <h3 class="mb-0">➕ Thêm mới lớp học</h3>
+            <h3 class="mb-0">➕ Thêm lớp học mới</h3>
         </div>
         <div class="card-body">
             @using (Html.BeginForm("Create", "Class", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
