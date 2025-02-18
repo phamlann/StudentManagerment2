@@ -105,21 +105,7 @@ namespace StudentManagerment2.Controllers
                 db.Users.Add(user);
                 db.SaveChanges();
                 return RedirectToAction("Index", "Account");
-                //try
-                //{
-                //    db.SaveChanges();
-                //    return RedirectToAction("Index", "Account");
-                //}
-                //catch (DbEntityValidationException ex)
-                //{
-                //    foreach (var validationErrors in ex.EntityValidationErrors)
-                //    {
-                //        foreach (var validationError in validationErrors.ValidationErrors)
-                //        {
-                //            ModelState.AddModelError(validationError.PropertyName, validationError.ErrorMessage);
-                //        }
-                //    }
-                //}
+                
             }
             ViewBag.Role = new SelectList(db.Roles.ToList(), "Id", "RoleName");// Lấy danh sách quyền
             return View(user);
@@ -132,27 +118,7 @@ namespace StudentManagerment2.Controllers
 
             return View(users);
         }
-        //public ActionResult Edit()
-        //{
-
-        //    return View();
-        //}
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Edit(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
-        //    }
-        //    User user = db.Users.Find(id);
-        //    if (user == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    ViewBag.Role = new SelectList(db.Roles.ToList(), "Id", "RoleName", user.RoleId);// Lấy danh sách quyền
-        //    return View(user);
-        //}
+      
         public ActionResult Edit(int? id)
         {
             if (id == null)
