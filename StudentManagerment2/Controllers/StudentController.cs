@@ -9,7 +9,6 @@ namespace StudentManagerment2.Controllers
     {
         private readonly ApplicationDbContext db = new ApplicationDbContext();//kết nối với database
 
-        
 
         public ActionResult Index()
         {
@@ -18,7 +17,7 @@ namespace StudentManagerment2.Controllers
         }
 
 
-        
+
         [AuthorizeByRole("Admin")]
         public ActionResult Create()
         {
@@ -26,7 +25,7 @@ namespace StudentManagerment2.Controllers
             return View();
         }
 
-        
+
         [HttpPost]
         [AuthorizeByRole("Admin")]
         [ValidateAntiForgeryToken]
@@ -42,7 +41,7 @@ namespace StudentManagerment2.Controllers
             return View(student);
         }
 
-        
+
         [AuthorizeByRole("Admin")]
         public ActionResult Edit(int? id)
         {
@@ -59,7 +58,7 @@ namespace StudentManagerment2.Controllers
             return View(student);
         }
 
-        
+
         [HttpPost]
         [AuthorizeByRole("Admin")]
         [ValidateAntiForgeryToken]// chống tấn công CSRF
@@ -75,7 +74,7 @@ namespace StudentManagerment2.Controllers
             return View(student);
         }
 
-        
+
         [AuthorizeByRole("Admin")]
         public ActionResult Delete(int? id)
         {
@@ -92,7 +91,7 @@ namespace StudentManagerment2.Controllers
             return View(student);
         }
 
-        
+
         [HttpPost, ActionName("Delete")]
         [AuthorizeByRole("Admin")]
         [ValidateAntiForgeryToken]

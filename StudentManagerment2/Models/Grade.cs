@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using StudentManagerment2.Models;
 
 namespace StudentManagerment2.Models
 {
@@ -8,17 +7,22 @@ namespace StudentManagerment2.Models
     public class Grade
     {
         [Key]
-        public int Id { get; set; } 
-        public int SubjectID { get; set; } 
+        public int Id { get; set; }
+
+        [Required(ErrorMessage = "Môn học không được để trống")]
+        public int SubjectID { get; set; }
+
         [ForeignKey("SubjectID")]
-        public Subject Subject { get; set; } 
-        [Required]
-        public float Score { get; set; } 
+        public Subject Subject { get; set; }
 
-        // Liên kết với Student
+        [Required(ErrorMessage = "Điểm số không được để trống")]
+        [Range(0, 10, ErrorMessage = "Điểm số phải từ 0 đến 10")]
+        public float Score { get; set; }
+
+        [Required(ErrorMessage = "Sinh viên không được để trống")]
         public int StudentId { get; set; }
-        [ForeignKey("StudentId")]
-        public Student Student { get; set; } 
-    }
 
+        [ForeignKey("StudentId")]
+        public Student Student { get; set; }
+    }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Web;
 using System.Web.Helpers;
@@ -103,10 +104,27 @@ namespace StudentManagerment2.Controllers
                 db.Users.Add(user);
                 db.SaveChanges();
                 return RedirectToAction("Index", "Account");
+                //try
+                //{
+                //    db.SaveChanges();
+                //    return RedirectToAction("Index", "Account");
+                //}
+                //catch (DbEntityValidationException ex)
+                //{
+                //    foreach (var validationErrors in ex.EntityValidationErrors)
+                //    {
+                //        foreach (var validationError in validationErrors.ValidationErrors)
+                //        {
+                //            ModelState.AddModelError(validationError.PropertyName, validationError.ErrorMessage);
+                //        }
+                //    }
+                //}
             }
             ViewBag.Role = new SelectList(db.Roles.ToList(), "Id", "RoleName");// Lấy danh sách quyền
             return View(user);
         }
+
+
         public ActionResult Index()
         {
             var users = db.Users.ToList();
