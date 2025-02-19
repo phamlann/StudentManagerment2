@@ -1,71 +1,57 @@
 ﻿@model StudentManagerment2.Models.User
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Đăng ký tài khoản";
     Layout = "~/Views/Shared/_LayoutLogin.cshtml";
 }
 
-<h2>Thêm tài khoản</h2>
+<div class="d-flex justify-content-center align-items-center vh-100">
+    <div class="card shadow border-0 p-3 rounded-4" style="width: 380px; background: #ffffff;">
+        <div class="card-body">
+            <h4 class="text-center text-primary fw-bold"><i class="bi bi-person-plus-fill"></i> Đăng ký</h4>
+            <hr>
 
-@using (Html.BeginForm("Create", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-{
-    @Html.AntiForgeryToken()
+            @using (Html.BeginForm("Create", "Account", FormMethod.Post, new { @class = "needs-validation", novalidate = "true" }))
+            {
+                @Html.AntiForgeryToken()
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+                <div class="mb-2">
+                    @Html.TextBoxFor(model => model.Username, new { @class = "form-control", placeholder = "Tên đăng nhập" })
+                    @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="mb-2">
+                    @Html.TextBoxFor(model => model.Email, new { @class = "form-control", type = "email", placeholder = "Email" })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="mb-2">
+                    @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control", placeholder = "Số điện thoại" })
+                    @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="mb-2">
+                    @Html.PasswordFor(model => model.Password, new { @class = "form-control", placeholder = "Mật khẩu" })
+                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="mb-2">
+                    @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control", placeholder = "Xác nhận mật khẩu" })
+                    @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="mb-2">
+                    @Html.DropDownListFor(x => x.RoleId, ViewBag.Role as SelectList, "- Chọn quyền -", new { @class = "form-select" })
+                    @Html.ValidationMessageFor(model => model.RoleId, "", new { @class = "text-danger" })
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100 fw-bold mt-2">
+                    <i class="bi bi-person-plus"></i> Đăng ký
+                </button>
+            }
         </div>
     </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.ConfirmPassword, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.RoleId, "Role", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @*@Html.DropDownList("RoleId", (SelectList)ViewBag.Role, htmlAttributes: new { @class = "form-control" })*@
-            @Html.DropDownListFor(x => x.RoleId, ViewBag.Role as SelectList, "-Chọn quyền-", new { @class = "form-control", @placeholder = "Chọn quyền" })
-            @Html.ValidationMessageFor(model => model.RoleId, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Thêm" class="btn btn-default" />
-        </div>
-    </div>
-}
+</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
