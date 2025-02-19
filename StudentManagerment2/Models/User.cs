@@ -32,9 +32,9 @@ namespace StudentManagerment2.Models
 
         [NotMapped]
         [Required(ErrorMessage = "Xác nhận mật khẩu không được để trống.")]
-        //[StringLength(255, ErrorMessage = "Xác nhận mật khẩu không được vượt quá 255 ký tự.")]
+        [StringLength(255, ErrorMessage = "Xác nhận mật khẩu không được vượt quá 255 ký tự.")]
         //[Compare("Password", ErrorMessage = "Mật khẩu xác nhận không khớp.")]
-        //[DataType(DataType.Password)]
+        [DataType(DataType.Password)]
         public string ConfirmPassword { get; set; }
 
         public int? RoleId { get; set; }

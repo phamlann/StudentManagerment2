@@ -83,14 +83,15 @@ namespace StudentManagerment2.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(User user, string ConfirmPassword)
+        public ActionResult Create(User user)
         {
             if (ModelState.IsValid)
             {
                 // Kiểm tra mật khẩu và xác nhận mật khẩu có khớp nhau không
-                if (user.Password != ConfirmPassword)
+                if (user.Password != user.ConfirmPassword)
                 {
                     ModelState.AddModelError("ConfirmPassword", "Mật khẩu và xác nhận mật khẩu không khớp.");
+                    ViewBag.Role = new SelectList(db.Roles.ToList(), "Id", "RoleName");
                     return View(user);
                 }
                 // Kiểm tra Email đã tồn tại chưa
@@ -105,11 +106,12 @@ namespace StudentManagerment2.Controllers
                 db.Users.Add(user);
                 db.SaveChanges();
                 return RedirectToAction("Index", "Account");
-                
+
             }
             ViewBag.Role = new SelectList(db.Roles.ToList(), "Id", "RoleName");// Lấy danh sách quyền
             return View(user);
         }
+
 
 
         public ActionResult Index()
